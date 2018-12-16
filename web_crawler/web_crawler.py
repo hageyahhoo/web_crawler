@@ -10,3 +10,11 @@ class WebCrawler():
         url = page[start_quote + 1:end_quote]
 
         return url, end_quote
+
+
+    def get_page(self, url):
+        try:
+            import urllib
+            return urllib.urlopen(url).read()
+        except:
+            return ""

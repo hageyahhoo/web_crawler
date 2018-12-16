@@ -18,6 +18,12 @@ class TestWebCrawler(unittest.TestCase):
         self.assertEqual(url, 'http://www.google.com')
         self.assertEqual(end_quote, 34)
 
+    def test_get_page_success(self):
+        self.assertNotEqual(self.func.get_page('https://www.google.com'), '')
+
+    def test_get_page_failure(self):
+        self.assertEqual(self.func.get_page('hoge'), '')
+
 
 if __name__ == '__main__':
     unittest.main()
