@@ -51,3 +51,10 @@ class WebCrawler():
         for e in b:
             if e not in a:
                 a.append(e)
+
+
+    def lookup(self, index, keyword):
+        for k, u in index:
+            if k == keyword:
+                return u
+        return None

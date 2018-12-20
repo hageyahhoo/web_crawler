@@ -82,5 +82,20 @@ class TestWebCrawler(unittest.TestCase):
         self.assertEqual(a, [1, 2, 3, 4, 5])
 
 
+    def test_lookup_NotFound(self):
+        index = []
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.func.add_to_index(index, "twitter", "http://www.twitter.com")
+        self.assertIsNone(self.func.lookup(index, "Facebook"))
+
+    def test_lookup_Found(self):
+        index = []
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.func.add_to_index(index, "twitter", "http://www.twitter.com")
+        result = self.func.lookup(index, "twitter")
+        self.assertEqual(len(result), 1)
+        self.assertIn("http://www.twitter.com", result)
+
+
 if __name__ == '__main__':
     unittest.main()
