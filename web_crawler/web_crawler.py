@@ -18,3 +18,9 @@ class WebCrawler():
             return urllib.urlopen(url).read()
         except:
             return ""
+
+
+    def union(self, a, b):
+        for e in b:
+            if e not in a:
+                a.append(e)
