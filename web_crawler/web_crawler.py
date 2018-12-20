@@ -53,6 +53,22 @@ class WebCrawler():
                 a.append(e)
 
 
+    def crawl_web(self, seed):
+        toCrawl = [seed]
+        crawled = []
+        index = []
+
+        While toCrawl:
+            page = toCrawl.pop()
+            if page not in crawled:
+                content = get_page(page)
+                add_page_to_index(index, page, content)
+                union(toCrawl, get_all_links(content))
+                crawled.append(page)
+
+        return index
+
+
     def lookup(self, index, keyword):
         for k, u in index:
             if k == keyword:
