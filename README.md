@@ -13,3 +13,4 @@ We use **[unittest](https://docs.python.org/2/library/unittest.html)** as Unit T
 
 # Links
 - [Python Unit Testing – Structuring Your Project](https://www.patricksoftwareblog.com/python-unit-testing-structuring-your-project/)
+- [Assertion Methods](https://docs.python.org/2/library/unittest.html#assert-methods)
