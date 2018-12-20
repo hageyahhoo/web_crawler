@@ -41,6 +41,12 @@ class WebCrawler():
         index.append([keyword, [url]])
 
 
+    def add_page_to_index(self, index, url, content):
+        words = content.split()
+        for word in words:
+            self.add_to_index(index, word, url)
+
+
     def union(self, a, b):
         for e in b:
             if e not in a:

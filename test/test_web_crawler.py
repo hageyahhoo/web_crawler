@@ -60,6 +60,21 @@ class TestWebCrawler(unittest.TestCase):
         self.assertIn(["google", ["http://www.google.com", "http://www.twitter.com"]], index)
 
 
+    def test_add_page_to_index_HasNoContent(self):
+        index = []
+        self.func.add_page_to_index(index, "http://www.google.com", "")
+        self.assertEqual(len(index), 0)
+
+    def test_add_page_to_index_HasContent(self):
+        index = []
+        self.func.add_page_to_index(index, "http://www.google.com", "This is Google")
+        print index
+        self.assertEqual(len(index), 3)
+        self.assertIn(["This", ["http://www.google.com"]], index)
+        self.assertIn(["is", ["http://www.google.com"]], index)
+        self.assertIn(["Google", ["http://www.google.com"]], index)
+
+
     def test_union(self):
         a = [1, 2, 3]
         b = [1, 4, 5]
