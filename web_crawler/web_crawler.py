@@ -1,5 +1,13 @@
 class WebCrawler():
 
+    def get_page(self, url):
+        try:
+            import urllib
+            return urllib.urlopen(url).read()
+        except:
+            return ""
+
+
     def get_next_target(self, page):
         start_link = page.find('<a href=')
         if start_link == -1:
@@ -12,12 +20,16 @@ class WebCrawler():
         return url, end_quote
 
 
-    def get_page(self, url):
-        try:
-            import urllib
-            return urllib.urlopen(url).read()
-        except:
-            return ""
+    def get_all_links(self, page):
+        links = []
+        while True:
+            url, endPos = self.get_next_target(page)
+            if url:
+                links.append(url)
+                page = page[endPos:]
+            else:
+                break
+        return links
 
 
     def union(self, a, b):

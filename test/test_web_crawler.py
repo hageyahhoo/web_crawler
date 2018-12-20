@@ -7,6 +7,13 @@ class TestWebCrawler(unittest.TestCase):
         self.func = WebCrawler()
 
 
+    def test_get_page_success(self):
+        self.assertNotEqual(self.func.get_page('https://www.google.com'), '')
+
+    def test_get_page_failure(self):
+        self.assertEqual(self.func.get_page('hoge'), '')
+
+
     def test_get_next_target_NotFound(self):
         page = 'foo <a hre> bar'
         url, end_quote = self.func.get_next_target(page)
@@ -20,11 +27,13 @@ class TestWebCrawler(unittest.TestCase):
         self.assertEqual(end_quote, 34)
 
 
-    def test_get_page_success(self):
-        self.assertNotEqual(self.func.get_page('https://www.google.com'), '')
+    def test_get_all_links_HasNoLink(self):
+        page = 'foo <a hre> bar'
+        self.assertEqual(self.func.get_all_links(page), [])
 
-    def test_get_page_failure(self):
-        self.assertEqual(self.func.get_page('hoge'), '')
+    def test_get_all_links_HasSomeLink(self):
+        page = 'foo <a href="http://www.google.com"> bar <a href="http://www.twitter.com"> baz'
+        self.assertEqual(self.func.get_all_links(page), ["http://www.google.com", "http://www.twitter.com"])
 
 
     def test_union(self):
