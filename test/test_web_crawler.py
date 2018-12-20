@@ -36,6 +36,30 @@ class TestWebCrawler(unittest.TestCase):
         self.assertEqual(self.func.get_all_links(page), ["http://www.google.com", "http://www.twitter.com"])
 
 
+    def test_add_to_index_simply(self):
+        index = []
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.func.add_to_index(index, "twitter", "http://www.twitter.com")
+        self.assertEqual(len(index), 2)
+        self.assertIn(["google", ["http://www.google.com"]], index)
+        self.assertIn(["twitter", ["http://www.twitter.com"]], index)
+
+    def test_add_to_index_duplicateKeyword(self):
+        index = []
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.func.add_to_index(index, "google", "http://www.twitter.com")
+        self.assertEqual(len(index), 1)
+        self.assertIn(["google", ["http://www.google.com", "http://www.twitter.com"]], index)
+
+    def test_add_to_index_duplicateKeywordAndURL(self):
+        index = []
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.func.add_to_index(index, "google", "http://www.twitter.com")
+        self.func.add_to_index(index, "google", "http://www.google.com")
+        self.assertEqual(len(index), 1)
+        self.assertIn(["google", ["http://www.google.com", "http://www.twitter.com"]], index)
+
+
     def test_union(self):
         a = [1, 2, 3]
         b = [1, 4, 5]

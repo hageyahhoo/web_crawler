@@ -32,6 +32,15 @@ class WebCrawler():
         return links
 
 
+    def add_to_index(self, index, keyword, url):
+        for k, u in index:
+            if k == keyword:
+                if url not in u:
+                    u.append(url)
+                return
+        index.append([keyword, [url]])
+
+
     def union(self, a, b):
         for e in b:
             if e not in a:
