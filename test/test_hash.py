@@ -17,5 +17,15 @@ class TestHash(unittest.TestCase):
         self.assertEqual(self.func.hash_function('LIJ', 12), 7)
 
 
+    def test_make_hash_table(self):
+        hashtable = self.func.make_hash_table(3)
+
+        self.assertEqual(len(hashtable), 3)
+        self.assertEqual(hashtable, [[], [], []])
+
+        hashtable[1].append('url')
+        self.assertEqual(hashtable, [[], ['url'], []])
+
+
 if __name__ == '__main__':
     unittest.main()
