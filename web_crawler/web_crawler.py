@@ -58,7 +58,7 @@ class WebCrawler():
         crawled = []
         index = []
 
-        While toCrawl:
+        while toCrawl:
             page = toCrawl.pop()
             if page not in crawled:
                 content = get_page(page)
