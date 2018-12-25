@@ -38,7 +38,7 @@ class TestHash(unittest.TestCase):
         self.func.update(hashtable, 'foo', 1)
         self.func.update(hashtable, 'foo', 2)
         self.assertEqual(len(hashtable[0]), 1)
-        self.assertEqual(hashtable[0][0], ['foo', 1])
+        self.assertEqual(hashtable[0][0], ['foo', 2])
         self.assertEqual(len(hashtable[1]), 0)
         self.assertEqual(len(hashtable[2]), 0)
 

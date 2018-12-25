@@ -1,23 +1,28 @@
 class Hash:
 
+    def get_element(self, bucket, keyword):
+        for element in bucket:
+            if element[0] == keyword:
+                return element
+        return None
+
+
     def lookup(self, hashtable, keyword):
-        # TODO Refactor
-        bucket = self.get_bucket(hashtable, keyword)
-        for k, v in bucket:
-            if k == keyword:
-                return v
+        element = self.get_element(self.get_bucket(hashtable, keyword), keyword)
+        if element:
+            return element[1]
         return None
 
 
     def update(self, hashtable, keyword, value):
-        # TODO Refactor
         bucket = self.get_bucket(hashtable, keyword)
-        for k, v in bucket:
-            if k == keyword:
-                # Update
-                v = value
-                return hashtable
-        bucket.append([keyword, value])
+
+        element = self.get_element(bucket, keyword)
+        if element:
+            element[1] = value
+        else:
+            bucket.append([keyword, value])
+
         return hashtable
 
 
