@@ -33,12 +33,11 @@ class WebCrawler():
 
 
     def add_to_index(self, index, keyword, url):
-        for k, u in index:
-            if k == keyword:
-                if url not in u:
-                    u.append(url)
-                return
-        index.append([keyword, [url]])
+        if keyword in index:
+            if url not in index[keyword]:
+                index[keyword].append(url)
+            return
+        index[keyword] = [url]
 
 
     def add_page_to_index(self, index, url, content):
@@ -56,21 +55,20 @@ class WebCrawler():
     def crawl_web(self, seed):
         toCrawl = [seed]
         crawled = []
-        index = []
+        index = {}
 
         while toCrawl:
             page = toCrawl.pop()
             if page not in crawled:
-                content = get_page(page)
-                add_page_to_index(index, page, content)
-                union(toCrawl, get_all_links(content))
+                content = self.get_page(page)
+                self.add_page_to_index(index, page, content)
+                self.union(toCrawl, self.get_all_links(content))
                 crawled.append(page)
 
         return index
 
 
     def lookup(self, index, keyword):
-        for k, u in index:
-            if k == keyword:
-                return u
+        if keyword in index:
+            return index[keyword]
         return None
