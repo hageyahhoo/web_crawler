@@ -1,4 +1,4 @@
-This repository is for **"Web Crawler"** based on **[Intro to Computer Science from Udacity](https://classroom.udacity.com/courses/cs101/)**.
+This repository is for **"Web Crawler"** based on **[Intro to Computer Science from Udacity](https://www.udacity.com/course/intro-to-computer-science--cs101)**.
 
 
 # Prerequite
